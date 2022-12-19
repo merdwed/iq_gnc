@@ -41,43 +41,30 @@ int main(int argc, char **argv)
 	initialize_local_frame();
 
 	//request takeoff
-	takeoff(10);
+	takeoff(5);
 
 
 	//specify some waypoints 
 	std::vector<gnc_api_waypoint> waypointList;
 	gnc_api_waypoint nextWayPoint;
-	float range = 50;
-	float spacing = 10;
-	int rows = 5; 
-	int row;
-	for(int i=0; i<5; i++)
-	{
-		row = i*2; 
-		nextWayPoint.x = row*spacing;
-		nextWayPoint.y = 0;
-		nextWayPoint.z = 10;
-		nextWayPoint.psi = 0;
-		waypointList.push_back(nextWayPoint);	
-		
-		nextWayPoint.x = row*spacing;
-		nextWayPoint.y = range;
-		nextWayPoint.z = 10;
-		nextWayPoint.psi = 0;
-		waypointList.push_back(nextWayPoint);	
-		
-		nextWayPoint.x = (row+1)*spacing;
-		nextWayPoint.y = range;
-		nextWayPoint.z = 10;
-		nextWayPoint.psi = 0;
-		waypointList.push_back(nextWayPoint);
 
-		nextWayPoint.x = (row+1)*spacing;
-		nextWayPoint.y = 0;
-		nextWayPoint.z = 10;
-		nextWayPoint.psi = 0;
-		waypointList.push_back(nextWayPoint);	
-	}
+	nextWayPoint.x = 0;
+	nextWayPoint.y = 0;
+	nextWayPoint.z = 5;
+	nextWayPoint.psi = 0;
+	waypointList.push_back(nextWayPoint);	
+	
+	nextWayPoint.x = 0;
+	nextWayPoint.y = 10;
+	nextWayPoint.z = 5;
+	nextWayPoint.psi = 0;
+	waypointList.push_back(nextWayPoint);	
+
+	nextWayPoint.x = 0;
+	nextWayPoint.y = 0;
+	nextWayPoint.z = 5;
+	nextWayPoint.psi = 0;
+	waypointList.push_back(nextWayPoint);
 	
 	//specify control loop rate. We recommend a low frequency to not over load the FCU with messages. Too many messages will cause the drone to be sluggish
 	ros::Rate rate(2.0);

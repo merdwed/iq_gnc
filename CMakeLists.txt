@@ -14,6 +14,8 @@ find_package(catkin REQUIRED COMPONENTS
   mavros_msgs
   rospy
   sensor_msgs
+  message_generation
+  geographic_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -49,12 +51,12 @@ catkin_python_setup()
 ##   * uncomment the generate_messages entry below
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
-## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+# Generate messages in the 'msg' folder
+add_message_files(
+  FILES
+  DroneList.msg
+  DroneStatus.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -70,11 +72,13 @@ catkin_python_setup()
 #   Action2.action
 # )
 
-## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+# Generate added messages and services with any dependencies listed here
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+  geometry_msgs
+  geographic_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -108,8 +112,13 @@ catkin_python_setup()
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES iq_gnc
-#  CATKIN_DEPENDS mavros std_msgs
+  CATKIN_DEPENDS 
+    message_runtime
+    std_msgs
+    geometry_msgs
+    geographic_msgs
 #  DEPENDS system_lib
+  
 )
 
 ###########
@@ -166,6 +175,9 @@ include_directories(
 #   scripts/my_python_script
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
+catkin_install_python(PROGRAMS scripts/communication.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables and/or libraries for installation
 # install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
@@ -213,10 +225,12 @@ target_link_libraries(gnc_example ${catkin_LIBRARIES})
 add_executable(set_wp src/set_wp.cpp)
 target_link_libraries(set_wp ${catkin_LIBRARIES})
 
+add_executable(sr_sol src/sr_sol.cpp)
+target_link_libraries(sr_sol ${catkin_LIBRARIES})
+
 #add_executable(sub_sol src/subscriber_sol.cpp)
 #target_link_libraries(sub_sol ${catkin_LIBRARIES})
 
-#add_executable(avoidance_sol src/avoidance_sol.cpp)
-#target_link_libraries(avoidance_sol ${catkin_LIBRARIES})
+add_executable(avoidance_sol src/avoidance_sol.cpp)
+target_link_libraries(avoidance_sol ${catkin_LIBRARIES})
 
-# Add tutorial add_executable lines here 

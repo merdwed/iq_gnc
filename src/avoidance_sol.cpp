@@ -14,11 +14,11 @@ void scan_cb(const sensor_msgs::LaserScan::ConstPtr& msg)
 	float avoidance_vector_x = 0; 
 	float avoidance_vector_y = 0;
 	bool avoid = false;
+	float d0 = 	4; 
+	float k = 0.5;
 	
 	for(int i=1; i<current_2D_scan.ranges.size(); i++)
 	{
-		float d0 = 3; 
-		float k = 0.5;
 
 		if(current_2D_scan.ranges[i] < d0 && current_2D_scan.ranges[i] > .35)
 		{
@@ -39,10 +39,10 @@ void scan_cb(const sensor_msgs::LaserScan::ConstPtr& msg)
 
 	if(avoid)
 	{
-		if( sqrt(pow(avoidance_vector_x,2) + pow(avoidance_vector_y,2)) > 3)
+		if( sqrt(pow(avoidance_vector_x,2) + pow(avoidance_vector_y,2)) > d0)
 		{
-			avoidance_vector_x = 3 * (avoidance_vector_x/sqrt(pow(avoidance_vector_x,2) + pow(avoidance_vector_y,2)));
-			avoidance_vector_y = 3 * (avoidance_vector_y/sqrt(pow(avoidance_vector_x,2) + pow(avoidance_vector_y,2)));
+			avoidance_vector_x = d0 * (avoidance_vector_x/sqrt(pow(avoidance_vector_x,2) + pow(avoidance_vector_y,2)));
+			avoidance_vector_y = d0 * (avoidance_vector_y/sqrt(pow(avoidance_vector_x,2) + pow(avoidance_vector_y,2)));
 		}
 		geometry_msgs::Point current_pos;
 		current_pos = get_current_location();

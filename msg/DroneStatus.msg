@@ -1,0 +1,2 @@
+int32 sysid
+geographic_msgs/GeoPoint position
