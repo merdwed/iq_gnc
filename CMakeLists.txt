@@ -54,8 +54,10 @@ catkin_python_setup()
 # Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  DroneList.msg
-  DroneStatus.msg
+  DroneListGlobal.msg
+  DroneStatusGlobal.msg
+  DroneListLocal.msg
+  DroneStatusLocal.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -178,6 +180,9 @@ include_directories(
 catkin_install_python(PROGRAMS scripts/communication.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+catkin_install_python(PROGRAMS scripts/takeoff-land.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables and/or libraries for installation
 # install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
@@ -225,12 +230,12 @@ target_link_libraries(gnc_example ${catkin_LIBRARIES})
 add_executable(set_wp src/set_wp.cpp)
 target_link_libraries(set_wp ${catkin_LIBRARIES})
 
-add_executable(sr_sol src/sr_sol.cpp)
-target_link_libraries(sr_sol ${catkin_LIBRARIES})
+# add_executable(sr_sol src/sr_sol.cpp)
+# target_link_libraries(sr_sol ${catkin_LIBRARIES})
 
 #add_executable(sub_sol src/subscriber_sol.cpp)
 #target_link_libraries(sub_sol ${catkin_LIBRARIES})
 
-add_executable(avoidance_sol src/avoidance_sol.cpp)
-target_link_libraries(avoidance_sol ${catkin_LIBRARIES})
+add_executable(avoidance src/avoidance.cpp)
+target_link_libraries(avoidance ${catkin_LIBRARIES})
 

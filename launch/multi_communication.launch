@@ -1,8 +1,12 @@
 <launch>
+	<arg name="ip" default="127.0.0.1"/>
+    <arg name= "port" default = "20001"/>
 	<group>
 		<node pkg="iq_gnc" type="communication.py" name="communication1" output="screen" ns="/drone1">
 			<param name="namespace" value="/drone1"/>
 			<param name="use_sim_time"  value="true" />
+			<param name="ip" value="$(arg ip)" />
+            <param name="port" value="$(arg port)" /> 
 		</node>
 	</group>
 	<group>
@@ -10,12 +14,16 @@
 		<node pkg="iq_gnc" type="communication.py" name="communication2" output="screen" ns="/drone2">
 			<param name="namespace" value="/drone2"/>
 			<param name="use_sim_time"  value="true" />
+			<param name="ip" value="$(arg ip)" />
+            <param name="port" value="$(arg port)" /> 
 		</node>
 	</group>
 	<group>	
 		<node pkg="iq_gnc" type="communication.py" name="communication3" output="screen" ns="/drone3">
 			<param name="namespace" value="/drone3"/>
 			<param name="use_sim_time"  value="true" />
+			<param name="ip" value="$(arg ip)" />
+            <param name="port" value="$(arg port)" /> 
 		</node>
 	</group>
 </launch>

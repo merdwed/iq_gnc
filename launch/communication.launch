@@ -1,0 +1,11 @@
+<launch>
+    <arg name="ip" default="25.22.42.81">
+    <arg name= "port" default = "20001">
+	<group>
+		<node pkg="iq_gnc" type="communication.py" name="communication1" output="screen" ns="/">
+			<param name="namespace" value="/"/>
+            <param name="ip" value="$(arg ip)" />
+            <param name="port" value="$(arg port)" /> 
+		</node>
+	</group>
+</launch>

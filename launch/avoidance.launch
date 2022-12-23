@@ -1,0 +1,7 @@
+<launch>
+    <group>
+		<node pkg="iq_gnc" type="avoidance" name="avoidance1" output="screen" ns="">
+			<param name="namespace" value=""/>
+		</node>
+	</group>
+</launch>

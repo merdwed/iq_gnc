@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 # Import ROS.
+import time
 import rospy
 # Import the API.
 from iq_gnc.py_gnc_functions import *
@@ -22,23 +23,14 @@ def main():
     drone.initialize_local_frame()
     # Request takeoff with an altitude of 3m.
     drone.takeoff(3)
+    drone.set_destination(0,0,3,0)
     # Specify control loop rate. We recommend a low frequency to not over load the FCU with messages. Too many messages will cause the drone to be sluggish.
     rate = rospy.Rate(3)
 
-    # Specify some waypoints
-    goals = [[0, 0, 3, 0], [5, 0, 3, -90], [5, 5, 3, 0],
-             [0, 5, 3, 90], [0, 0, 3, 180], [0, 0, 3, 0]]
-    i = 0
-
-    while i < len(goals):
-        drone.set_destination(
-            x=goals[i][0], y=goals[i][1], z=goals[i][2], psi=goals[i][3])
-        rate.sleep()
-        if drone.check_waypoint_reached():
-            i += 1
+    time.sleep(10)
     # Land after all waypoints is reached.
     drone.land()
-    rospy.loginfo(CGREEN2 + "All waypoints reached landing now." + CEND)
+    rospy.loginfo(CGREEN2 + "landing now." + CEND)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,8 @@
+<launch>
+	<group>
+		<node pkg="iq_gnc" type="avoidance" name="avoidance2" output="screen" ns="/drone2">
+			<param name="namespace" value="/drone2"/>
+			<param name="use_sim_time"  value="true" />
+		</node>
+	</group>
+</launch>

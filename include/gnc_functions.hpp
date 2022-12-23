@@ -473,10 +473,10 @@ int set_speed(float speed__mps)
 	speed_cmd.request.param2 = speed__mps;
 	speed_cmd.request.param3 = -1; // no throttle change
 	speed_cmd.request.param4 = 0; // absolute speed
-	ROS_INFO("setting speed to %f", speed__mps);
+	//ROS_INFO("setting speed to %f", speed__mps);
 	if(command_client.call(speed_cmd))
 	{
-		ROS_INFO("change speed command succeeded %d", speed_cmd.response.success);
+		//ROS_INFO("change speed command succeeded %d", speed_cmd.response.success);
 		return 0;
 	}else{
 		ROS_ERROR("change speed command failed %d", speed_cmd.response.success);
